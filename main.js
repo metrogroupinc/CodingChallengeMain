@@ -44,13 +44,11 @@ function calcButtonClick() {
 // 3) DONE! If the remaining cat tax is zero or fewer, update the amountOwed div to display "Your debts are paid..."
 // 4) DONE! If the cat tax was payable (amount was greater than 0) when the button was clicked, make a call to the cat api to get a cat image (https://api.thecatapi.com/v1/images/search)
 // 5) DONE! Once the cat image is retrieved, append the image to the image container
-// 6) If the cat wax was not payable (amount was less than or equal to 0) when the button was clicked, replace the entire contents of the container with the gif found here (https://gfycat.com/snivelingbeautifuljoey-cat)
-
+// 6) DONE! If the cat wax was not payable (amount was less than or equal to 0) when the button was clicked, replace the entire contents of the container with the gif found here (https://gfycat.com/snivelingbeautifuljoey-cat)
 
 function payButton() {
     currentCatTax --;    
     if (currentCatTax > 0) {
-        let catUrl = '';
         amountOwed.innerText = `You still owe ${currentCatTax} cat tax! Pay up!`;
         fetch('https://api.thecatapi.com/v1/images/search')
         .then(res => res.json())
@@ -59,9 +57,7 @@ function payButton() {
             catImageDiv.classList.add('catImage')
             catImageDiv.src = data[0].url;      
             document.querySelector('.imageContainer').prepend(catImageDiv);             
-        })  
-        console.log(catUrl)
-    
+        });
     } else if (currentCatTax <= 0) {
         amountOwed.innerText = `Your debts are paid.`;
         document.querySelector('.container').innerHTML = "<iframe src='https://gfycat.com/ifr/SnivelingBeautifulJoey' frameborder='0' scrolling='no' allowfullscreen width='640' height='846'></iframe><p> <a href='https://gfycat.com/snivelingbeautifuljoey-cat'>via Gfycat</a></p>";  
